@@ -21,7 +21,8 @@ class HtmlCacheBaseHelper extends Helper {
 		'test_mode' => false,
 		'host' => null,
 		'domain' => false,
-		'www_root' => null
+		'www_root' => null,
+        'error' => true,
 	);
 
 /**
@@ -75,6 +76,9 @@ class HtmlCacheBaseHelper extends Helper {
 
 		//handle 404s
 		if ($view->name == 'CakeError') {
+            if (!$this->options['error']) {
+                return;
+            }
 			$path = $this->params['url']['url'];
 		} else {
 			$path = $this->here;
